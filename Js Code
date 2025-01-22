@@ -1,0 +1,7 @@
+var userGR = new GlideRecord('sys_user');
+userGR.get('user_name', current.variables.user_name);
+
+if (userGR.isValidRecord()) {
+  userGR.addRole('role_name');  // Add the required role
+  userGR.update();
+}

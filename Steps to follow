@@ -1,0 +1,78 @@
+To implement an automated access provisioning catalog item in ServiceNow, follow these step-by-step procedures to create a solution using workflows, catalog items, and appropriate scripting. This will grant certain access based on user requests.
+
+Step 1: Define Requirements & Access Rules
+        Before diving into the implementation, clearly define the requirements:
+        What type of access needs to be granted? (e.g., Instance access, application access, roles, etc.)
+        Who is requesting the access? (e.g., specific users or groups)
+        What is the approval process (if any)?
+        What will trigger access granting (e.g., approval or automated criteria)?
+Step 2: Create a New Catalog Item
+        Navigate to the Service Catalog:
+        Go to Service Catalog > Catalog Definitions > Maintain Items in the Application Navigator.
+        Create a New Catalog Item:
+        Click on New to create a new catalog item.
+        Provide a name (e.g., Automated Access Provisioning).
+        Choose an appropriate category for the item (e.g., Access Requests).
+        Optionally, fill out additional fields like Short Description and Description.
+Step 3: Define Variables for the Catalog Item
+  Add Variables: These variables will collect input from the user when submitting the catalog item.
+                For example, create a dropdown list for "Access Type", where users can select from different access types (e.g., Instance 1, Instance 2, Application XYZ).
+
+   Create another variable for user identification, such as User, if necessary.
+
+  Set default values or make them mandatory depending on your needs.
+
+  Go to the Variables tab on the Catalog Item form and click New to create the necessary variables.
+
+Step 4: Create a Workflow
+      Now, create a workflow that will automate the process of granting access based on the catalog item request.
+
+   Navigate to Workflow:
+
+   Go to Workflow > Workflow Editor in the Application Navigator.
+   Create a New Workflow:
+
+  Click on New to create a new workflow.
+  Provide a name for the workflow (e.g., Automated Access Workflow).
+  In the Table field, select Catalog Task (or any custom table that matches your needs).
+Design Workflow:
+
+Use the Start block as the entry point.
+Add a condition to check what type of access is requested based on the catalog item’s variable (like Access Type).
+Grant Access (Script Activity):
+
+Add a Run Script activity to the workflow.
+In the script, use GlideRecord to assign access (e.g., granting roles or configuring permissions) based on the selection the user made in the catalog item.
+
+
+Add Additional Steps:
+
+Add an approval activity if required.
+If needed, add a Wait for Condition activity for approval processes or asynchronous tasks.
+Publish the Workflow:
+
+        Once the workflow is designed, click Publish to make it active.
+
+
+Step 5: Associate Workflow with Catalog Item
+       Navigate to the Catalog Item:
+       Go back to the catalog item created in Step 2.
+       Link the Workflow:
+      In the Workflow field, select the newly created workflow (e.g., Automated Access Workflow).
+      Save the catalog item form.
+
+
+Step 6: Testing the Catalog Item
+        Test the Catalog Item:
+        Navigate to Service Catalog > My Service Catalog and search for the new catalog item.
+         Submit a request for the item, providing necessary input.
+       Verify Access Provisioning:
+         Ensure that the workflow triggers successfully and that access is granted according to the logic defined in the workflow.
+         Check if the roles or permissions are properly applied to the user.
+
+Step 7: Final Testing and Validation
+Test the entire flow: Make sure everything works smoothly from requesting the catalog item to receiving access.
+Handle errors or exceptions: Implement error handling in the script to ensure users are notified if something goes wrong.
+Step 8: Documentation and Handover
+Document the process, including workflow logic, catalog item variables, and any custom scripts.
+Ensure that users understand how to use the new catalog item for access requests.
